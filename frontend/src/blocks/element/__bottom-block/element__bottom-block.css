@@ -1,0 +1,6 @@
+.element__bottom-block {
+  margin: 22px 20px 0 22px;
+  padding: 0 0 26px;
+  display: flex;
+  justify-content: space-between;
+}

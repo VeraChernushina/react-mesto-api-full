@@ -1,0 +1,14 @@
+.page {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

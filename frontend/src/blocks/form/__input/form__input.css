@@ -1,0 +1,29 @@
+.form__input {
+  margin: 0;
+  padding: 0;
+  max-width: 358px;
+  width: 100%;
+  border: 0;
+  font-family: inherit;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 32px;
+  color: #000;
+  outline: none;
+}
+
+.form__input::-webkit-input-placeholder {
+  color: #c4c4c4;
+}
+
+.form__input::-moz-placeholder {
+  color: #c4c4c4;
+}
+
+@media screen and (max-width: 480px) {
+  .form__input {
+    max-width: 238px;
+  }
+}

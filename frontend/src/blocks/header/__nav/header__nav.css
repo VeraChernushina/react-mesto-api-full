@@ -1,0 +1,27 @@
+.header__nav {
+  display: flex;
+  margin: 6px 0 0;
+  padding: 0;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+.header__nav span {
+  margin-right: 24px;
+  color: #fff;
+}
+
+.header__sign-out {
+  display: block;
+  max-height: 22px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #a9a9a9;
+}
+
+.header__sign-out {
+  cursor: pointer;
+}
