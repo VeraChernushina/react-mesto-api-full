@@ -21,7 +21,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 });
 
 app.use(cors({
-  origin: 'http://verachernushina.mesto.nomoredomains.work',
+  origin: ['http://verachernushina.mesto.nomoredomains.work', 'http://verachernushina.mesto.nomoredomains.work/'],
   credentials: true,
 }));
 
