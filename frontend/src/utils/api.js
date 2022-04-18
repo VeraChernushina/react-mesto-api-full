@@ -1,4 +1,4 @@
-import { checkResponse } from './utils';
+import { checkResponse, BASE_URL } from './utils';
 
 class Api {
   constructor(options) {
@@ -16,6 +16,7 @@ class Api {
   // Получение карточек с сервера
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
+      credentials: 'include',
       headers: this._headers,
     }).then((res) => checkResponse(res));
   }
@@ -24,6 +25,7 @@ class Api {
   addCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
@@ -36,6 +38,7 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: this._headers,
     }).then((res) => checkResponse(res));
   }
@@ -44,6 +47,7 @@ class Api {
   changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: `${!isLiked ? 'DELETE' : 'PUT'}`,
+      credentials: 'include',
       headers: this._headers,
     }).then((res) => checkResponse(res));
   }
@@ -51,6 +55,7 @@ class Api {
   // Получение информации о пользователе с сервера
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
+      credentials: 'include',
       headers: this._headers,
     }).then((res) => checkResponse(res));
   }
@@ -59,6 +64,7 @@ class Api {
   setUserInfo(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
@@ -71,6 +77,7 @@ class Api {
   setUserAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar,
@@ -80,9 +87,8 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-31',
+  baseUrl: BASE_URL,
   headers: {
-    authorization: '149edd5b-e153-46c6-af52-dbaf211389a2',
     'Content-Type': 'application/json',
   },
 });

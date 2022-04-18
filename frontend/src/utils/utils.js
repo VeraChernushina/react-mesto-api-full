@@ -5,3 +5,5 @@ export const checkResponse = (response) => {
         new Error(`Ошибка ${response.status}: ${response.statusText}`)
       );
 };
+
+export const BASE_URL = 'https://api.verachernushina.mesto.nomoredomains.work'
