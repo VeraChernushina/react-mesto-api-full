@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
     validate: {
       validator: (v) => isURL(v),
       message: 'Неправильный формат URL',
-    }
+    },
   },
 });
 
