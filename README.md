@@ -3,3 +3,4 @@
   
 Публичный IP-адрес сервера - 51.250.105.58
 Домен - https://verachernushina.mesto.nomoredomains.work/
+Домен сервера - https://api.verachernushina.mesto.nomoredomains.work/
