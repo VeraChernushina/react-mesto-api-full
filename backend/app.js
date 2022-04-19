@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const helmet = require("helmet");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
@@ -31,6 +32,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // подключаем логгер запросов
 app.use(requestLogger);
+
+app.use(helmet());
 
 app.get('/crash-test', () => {
   setTimeout(() => {
