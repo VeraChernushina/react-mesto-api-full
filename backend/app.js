@@ -22,19 +22,17 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
+const allowedCors = [
+  'http://verachernushina.mesto.nomoredomains.work',
+  'http://verachernushina.mesto.nomoredomains.work/',
+  'https://verachernushina.mesto.nomoredomains.work',
+  'https://verachernushina.mesto.nomoredomains.work/']
+
 app.use(cors({
-  origin: ['http://verachernushina.mesto.nomoredomains.work', 'https://verachernushina.mesto.nomoredomains.work', 'http://localhost:3000', 'https://localhost:3000'],
+  origin: allowedCors,
+  methods: ['GET','POST','DELETE','UPDATE', 'PUT', 'PATCH', 'OPTIONS'],
   credentials: true,
 }));
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
-  if (req.method === 'OPTIONS') {
-    res.send(200);
-  }
-  next();
-});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
