@@ -1,6 +1,4 @@
-import { checkResponse } from './utils';
-
-export const BASE_URL = process.env.REACT_APP_BASE_URL || 'https://localhost:3000';
+import { checkResponse, BASE_URL } from './utils';
 
 const headers = {
   Accept: 'application/json',
