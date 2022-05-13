@@ -4,9 +4,9 @@ const helmet = require("helmet");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-const cors = require('cors');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
+const cors = require('./middlewares/cors')
 const errorHandler = require('./middlewares/errorHandler');
 const NotFoundError = require('./errors/NotFoundError');
 const {
@@ -22,24 +22,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
-// const allowedCors = [
-//   'http://verachernushina.mesto.nomoredomains.work',
-//   'http://verachernushina.mesto.nomoredomains.work/',
-//   'https://verachernushina.mesto.nomoredomains.work',
-//   'https://verachernushina.mesto.nomoredomains.work/']
-
-// app.use(cors({
-//   origin: allowedCors,
-//   methods: ['GET','POST','DELETE','UPDATE', 'PUT', 'PATCH', 'OPTIONS'],
-//   credentials: true,
-// }));
-
-app.use(cors({
-  origin: '*',
-}));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(cors);
 
 // подключаем логгер запросов
 app.use(requestLogger);
