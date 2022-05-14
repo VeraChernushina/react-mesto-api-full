@@ -214,7 +214,7 @@ function App() {
 
   useEffect(() => {
     handleTokenCheck();
-  }, []);
+  }, [history]);
 
   useEffect(() => {
     if (isLoggedIn) {
