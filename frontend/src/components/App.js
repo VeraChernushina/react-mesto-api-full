@@ -209,13 +209,14 @@ function App() {
   // Выход
   const handleSignOut = () => {
     setIsLoggedIn(false);
-    setAuthorizationEmail('')
+    setCurrentUser({});
+    setAuthorizationEmail('');
     localStorage.removeItem('jwt');
     history.push('/sign-in');
   };
 
   // Проверка токена
-  const handleTokenCheck = useCallback(() => {
+  const handleTokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
     if (!jwt) {
       return;
@@ -229,11 +230,10 @@ function App() {
         history.push('/');
       })
       .catch((err) => console.log(err));
-  }, [history]);
+  };
 
   useEffect(() => {
     if (isLoggedIn) {
-      setCurrentUser({})
       history.push('/');
     }
   }, [isLoggedIn, history]);
