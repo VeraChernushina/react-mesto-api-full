@@ -2,9 +2,7 @@ const allowedCors = [
   'http://verachernushina.mesto.nomoredomains.work',
   'https://verachernushina.mesto.nomoredomains.work',
   'http://localhost:3000',
-  'https://localhost:3000',
-  'https://auth.nomoreparties.co',
-  'https://mesto.nomoreparties.co/v1/cohort-31'
+  'https://localhost:3000'
 ]
 
 const DEFAULT_ALLOWED_METHODS = "GET,HEAD,PUT,PATCH,POST,DELETE";

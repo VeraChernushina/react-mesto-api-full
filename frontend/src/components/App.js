@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -42,16 +42,18 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([userData, initialCards]) => {
-        setCurrentUser(userData);
-        setAuthorizationEmail(userData.email)
-        setCards(initialCards);
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      });
-  }, []);
+    if (isLoggedIn) {
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+        .then(([userData, initialCards]) => {
+          setCurrentUser(userData);
+          setAuthorizationEmail(userData.email)
+          setCards(initialCards);
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -85,7 +87,7 @@ function App() {
   };
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     api
       .changeLikeCardStatus(card._id, !isLiked)
@@ -213,7 +215,7 @@ function App() {
   };
 
   // Проверка токена
-  const handleTokenCheck = () => {
+  const handleTokenCheck = useCallback(() => {
     const jwt = localStorage.getItem('jwt');
     if (!jwt) {
       return;
@@ -222,17 +224,19 @@ function App() {
       .getContent(jwt)
       .then((data) => {
         setAuthorizationEmail(data.email);
+        setCurrentUser(data)
         setIsLoggedIn(true);
         history.push('/');
       })
       .catch((err) => console.log(err));
-  };
+  }, [history]);
 
   useEffect(() => {
     if (isLoggedIn) {
+      setCurrentUser({})
       history.push('/');
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, history]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

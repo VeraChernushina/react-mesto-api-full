@@ -29,7 +29,6 @@ const Register = ({ onRegister }) => {
             id="password"
             name="password"
             type="password"
-            minLength="8"
             placeholder="Пароль"
             autoComplete="password"
             value={enteredValues.password}

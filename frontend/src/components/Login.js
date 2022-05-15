@@ -28,7 +28,6 @@ const Login = ({ onLogin }) => {
         <span className="auth__error">{errors.email}</span>
         <input
           type="password"
-          minLength="8"
           name="password"
           id="password"
           placeholder="Пароль"
