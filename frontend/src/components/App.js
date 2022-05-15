@@ -162,7 +162,7 @@ function App() {
   const handleRegistration = (data) => {
     return auth
       .register(data)
-      .then((data) => {
+      .then(() => {
         setIsRegistrationSuccessful(true);
         openInfoTooltip();
         history.push('/sign-in');
@@ -205,7 +205,7 @@ function App() {
     auth
       .getContent(jwt)
       .then((data) => {
-        setAuthorizationEmail(data.data.email);
+        setAuthorizationEmail(data.email);
         setIsLoggedIn(true);
         history.push('/');
       })
