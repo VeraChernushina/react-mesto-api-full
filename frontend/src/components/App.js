@@ -45,12 +45,27 @@ function App() {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([userData, initialCards]) => {
         setCurrentUser(userData);
+        setAuthorizationEmail(userData.email)
         setCards(initialCards);
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       });
   }, []);
+
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      return auth
+        .getContent(jwt)
+        .then((data) => {
+          setAuthorizationEmail(data.email);
+          setIsLoggedIn(true);
+          history.push('/');
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [history])
 
   const openEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -192,6 +207,7 @@ function App() {
   // Выход
   const handleSignOut = () => {
     setIsLoggedIn(false);
+    setAuthorizationEmail('')
     localStorage.removeItem('jwt');
     history.push('/sign-in');
   };
@@ -211,10 +227,6 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
-
-  useEffect(() => {
-    handleTokenCheck();
-  }, [history]);
 
   useEffect(() => {
     if (isLoggedIn) {
