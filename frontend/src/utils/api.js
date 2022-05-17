@@ -3,7 +3,6 @@ import { checkResponse, BASE_URL } from './utils';
 class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
-    this._headers = options.headers;
   }
 
   _parseResponse(res) {
@@ -14,10 +13,12 @@ class Api {
   }
 
   // Получение карточек с сервера
-  getInitialCards() {
+  getInitialCards(jwt) {
     return fetch(`${this._baseUrl}/cards`, {
-      credentials: 'include',
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${jwt}`,
+      }
     }).then((res) => checkResponse(res));
   }
 

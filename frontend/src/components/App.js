@@ -42,31 +42,7 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    if (isLoggedIn) {
-      Promise.all([api.getUserInfo(), api.getInitialCards()])
-        .then(([userData, initialCards]) => {
-          setCurrentUser(userData);
-          setAuthorizationEmail(userData.email)
-          setCards(initialCards);
-        })
-        .catch((err) => {
-          console.log(`Ошибка: ${err}`);
-        });
-    }
-  }, [isLoggedIn]);
-
-  useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      return auth
-        .getContent(jwt)
-        .then((data) => {
-          setAuthorizationEmail(data.email);
-          setIsLoggedIn(true);
-          history.push('/');
-        })
-        .catch((err) => console.log(err));
-    }
+    handleTokenCheck()
   }, [history])
 
   const openEditAvatarClick = () => {
@@ -208,11 +184,11 @@ function App() {
 
   // Выход
   const handleSignOut = () => {
+    localStorage.removeItem('jwt');
+    history.push('/sign-in');
     setIsLoggedIn(false);
     setCurrentUser({});
     setAuthorizationEmail('');
-    localStorage.removeItem('jwt');
-    history.push('/sign-in');
   };
 
   // Проверка токена
@@ -228,6 +204,12 @@ function App() {
         setCurrentUser(data)
         setIsLoggedIn(true);
         history.push('/');
+      })
+      .catch((err) => console.log(err));
+    api
+      .getInitialCards(jwt)
+      .then((initialCards) => {
+        setCards(initialCards)
       })
       .catch((err) => console.log(err));
   };
