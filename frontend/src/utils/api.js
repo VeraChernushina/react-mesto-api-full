@@ -23,11 +23,13 @@ class Api {
   }
 
   // Добавление новой карточки через попап
-  addCard(data) {
+  addCard(data, jwt) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      credentials: 'include',
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${jwt}`,
+      },
       body: JSON.stringify({
         name: data.name,
         link: data.link,
@@ -36,20 +38,24 @@ class Api {
   }
 
   // Удаление карточки
-  deleteCard(cardId) {
+  deleteCard(cardId, jwt) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
-      credentials: 'include',
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${jwt}`,
+      },
     }).then((res) => checkResponse(res));
   }
 
   // like/dislike
-  changeLikeCardStatus(cardId, isLiked) {
+  changeLikeCardStatus(cardId, isLiked, jwt) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: `${!isLiked ? 'DELETE' : 'PUT'}`,
-      credentials: 'include',
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${jwt}`,
+      },
     }).then((res) => checkResponse(res));
   }
 
@@ -62,11 +68,13 @@ class Api {
   }
 
   // Редактирование информации о пользователе через попап
-  setUserInfo(data) {
+  setUserInfo(data, jwt) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      credentials: 'include',
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${jwt}`,
+      },
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -75,11 +83,13 @@ class Api {
   }
 
   // Редактирование аватара пользователя через попап
-  setUserAvatar(data) {
+  setUserAvatar(data, jwt) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      credentials: 'include',
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${jwt}`,
+      },
       body: JSON.stringify({
         avatar: data.avatar,
       }),
