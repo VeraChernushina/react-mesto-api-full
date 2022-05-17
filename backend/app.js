@@ -1,12 +1,12 @@
 require('dotenv').config();
 const express = require('express');
-const helmet = require("helmet");
+const helmet = require('helmet');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
-const cors = require('./middlewares/cors')
+const cors = require('./middlewares/cors');
 const errorHandler = require('./middlewares/errorHandler');
 const NotFoundError = require('./errors/NotFoundError');
 const {
